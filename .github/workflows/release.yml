@@ -39,8 +39,7 @@ jobs:
           version-patch: true
           skip-perform: true
           release-branch-name: "main"
-
-          #ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       # - run: mvn -B -Dmaven.test.skip=true -DuseReleaseProfile=false -DpreparationGoals=clean release:clean release:prepare -DtagNameFormat=demo-@{project.version}
       # - run: mvn -B release:perform -Darguments="-Dmaven.javadoc.skip=true -DskipTests"

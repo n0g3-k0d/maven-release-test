@@ -30,9 +30,9 @@
 	</dependencies>
 
 	<scm>
-        <connection>scm:git:${project.scm.url}</connection>
+		<connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
-		<url>https://github.com/n0g3-k0d/maven-release-test.git</url>
+		<url>git@github.com:n0g3-k0d/maven-release-test.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
