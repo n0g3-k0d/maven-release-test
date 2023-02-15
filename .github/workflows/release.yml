@@ -1,0 +1,29 @@
+name: Release workflow
+
+on:
+  push:
+    branches: ["main"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  maven-build:
+    name: Maven build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure Git user
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "adopt"
+          cache: maven
+          server-id: github
+      - run: mvn -B -Dmaven.test.skip=true -DuseReleaseProfile=false -DpreparationGoals=clean release:clean release:prepare -DtagNameFormat=demo-@{project.version}
+      - run: mvn -B release:perform -Darguments="-Dmaven.javadoc.skip=true -DskipTests"
