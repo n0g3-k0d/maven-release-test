@@ -36,6 +36,8 @@ jobs:
           git-release-bot-email: "bot@idhub.io"
 
           maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Dmaven.deploy.skip=true"
+          version-patch: true
+          skip-perform: true
           #ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       # - run: mvn -B -Dmaven.test.skip=true -DuseReleaseProfile=false -DpreparationGoals=clean release:clean release:prepare -DtagNameFormat=demo-@{project.version}
