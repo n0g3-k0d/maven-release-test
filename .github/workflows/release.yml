@@ -12,6 +12,8 @@ jobs:
   maven-build:
     name: Maven build
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - name: Configure Git user
