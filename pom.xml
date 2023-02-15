@@ -29,6 +29,11 @@
 		</dependency>
 	</dependencies>
 
+	<scm>
+        <connection>scm:git:git://git@github.com/n0g3-k0d/maven-release-test</connection>
+        <tag>HEAD</tag>
+    </scm>
+
 	<build>
 		<plugins>
 			<plugin>
