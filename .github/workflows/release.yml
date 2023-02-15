@@ -28,13 +28,12 @@ jobs:
           distribution: "adopt"
           cache: maven
           server-id: github
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "[ci skip] version bump"
       - run: npm version patch -no-git-tag-version
       - run: echo "APP_VERSION=$(npm pkg get version)" >> $GITHUB_ENV
       - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit 
-
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "[ci skip] version bump"
       # - run: npm version patch
       # - name: Release
       #   uses: qcastel/github-actions-maven-release@master
