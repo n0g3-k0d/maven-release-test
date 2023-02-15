@@ -31,7 +31,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "[ci skip] version bump"
-      - run: npm version patch
+      - run: npm version patch -no-git-tag-version
       - run: mvn versions:set -DnewVersion={{npm pkg get version}} versions:commit 
 
       # - run: npm version patch
