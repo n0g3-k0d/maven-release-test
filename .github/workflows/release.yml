@@ -34,6 +34,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "[ci skip] version bump"
+          tagging_message: "${{ env.APP_VERSION }}"
       # - run: npm version patch
       # - name: Release
       #   uses: qcastel/github-actions-maven-release@master
