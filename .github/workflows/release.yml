@@ -32,7 +32,8 @@ jobs:
         with:
           commit_message: "[ci skip] version bump"
       - run: npm version patch -no-git-tag-version
-      - run: mvn -B versions:set -DnewVersion=${{npm pkg get version}} versions:commit 
+      - run: echo "APP_VERSION=$(npm pkg get version)" >> $GITHUB_ENV
+      - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit 
 
       # - run: npm version patch
       # - name: Release
