@@ -20,6 +20,9 @@ jobs:
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
@@ -27,6 +30,7 @@ jobs:
           distribution: "adopt"
           cache: maven
           server-id: github
+      - run: npm version patch
       - name: Release
         uses: qcastel/github-actions-maven-release@master
         env:
