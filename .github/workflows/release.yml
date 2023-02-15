@@ -13,7 +13,7 @@ jobs:
     name: Maven build
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password
     steps:
       - uses: actions/checkout@v3
       - name: Configure Git user
