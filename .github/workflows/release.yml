@@ -35,7 +35,7 @@ jobs:
           git-release-bot-name: "bot-idhub"
           git-release-bot-email: "bot@idhub.io"
 
-          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Dmaven.deploy.skip=true -DpreparationGoals=clean release:clean release:prepare"
+          maven-args: "-Dmaven.javadoc.skip=true -Dmaven.test.skip=true -DskipTests -DskipITs -Dmaven.deploy.skip=true -DpreparationGoals=clean release:clean release:prepare"
           version-patch: true
           skip-perform: true
           release-branch-name: "main"
