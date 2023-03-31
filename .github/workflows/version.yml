@@ -30,7 +30,7 @@ jobs:
           server-id: github
       - run: echo "BUILD_NUMBER=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f3)" >> $GITHUB_ENV
       - run: echo "HEAD=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f1)" >> $GITHUB_ENV
-      - run: echo "YEAR=$(cut -c3-4 <<< date +%Y) >> $GITHUB_ENV"
+      - run: echo "YEAR=$(cut -c3-4 <<< $(date +%Y)) >> $GITHUB_ENV"
       - run: echo "WEEK=$(date +%V) >> $GITHUB_ENV"
       - run: echo "APP_VERSION=$(${{env.HEAD}}${{env.YEAR}}${{env.WEEK}}${{env.BUILD_NUMBER}})" >> $GITHUB_ENV
       - run: echo ${{env.APP_VERSION}}
