@@ -34,9 +34,10 @@ jobs:
       - run: echo "WEEK=$(date +%V)" >> $GITHUB_ENV
       - run: echo "APP_VERSION=${{env.HEAD}}.${{env.YEAR}}${{env.WEEK}}.$((${{env.BUILD_NUMBER}} + 1))" >> $GITHUB_ENV
       - run: echo ${{env.APP_VERSION}}
-#      - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit
-#
-#      - uses: stefanzweifel/git-auto-commit-action@v4
-#        with:
-#          commit_message: "[ci skip] release version: ${{ env.APP_VERSION }}"
-#          tagging_message: ${{ env.APP_VERSION }}
+      - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit
+      - run: yarn version --new-version ${{ env.APP_VERSION }} --no-git-tag-version
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "[ci skip] release version: ${{ env.APP_VERSION }}"
+          tagging_message: ${{ env.APP_VERSION }}
