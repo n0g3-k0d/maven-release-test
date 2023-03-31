@@ -28,8 +28,10 @@ jobs:
           distribution: "adopt"
           cache: maven
           server-id: github
-#      - run: npm version patch -no-git-tag-version
-#      - run: echo "APP_VERSION=$(sed -e 's/^"//' -e 's/"$//' <<<$(npm pkg get version))" >> $GITHUB_ENV
+      - run: echo "BUILD_NUMBER=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f3)" >> $GITHUB_ENV
+      - run: echo "HEAD=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f1)" >> $GITHUB_ENV
+      - run: echo "APP_VERSION=$(sh version.sh head=$HEAD build=$BUILD_NUMBER)" >> $GITHUB_ENV
+      - run: echo $APP_VERSION
 #      - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit
 #
 #      - uses: stefanzweifel/git-auto-commit-action@v4
