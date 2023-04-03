@@ -32,7 +32,7 @@ jobs:
         run: echo "feature"
       - if: ${{ contrains(github.ref, /bug/)  }}
         run: echo "bug"
-      - run: echo "yolo"
+      - run: echo "yoloa"
       # - run: echo "MAJOR=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f1)" >> $GITHUB_ENV
       # - run: echo "YEAR_WEEK=$(cut -c3-4 <<< $(date +%Y))$(date +%V)" >> $GITHUB_ENV
       # - run: echo "BUILD_NUMBER=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f3)" >> $GITHUB_ENV
