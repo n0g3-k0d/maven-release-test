@@ -9,7 +9,11 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
+<<<<<<< Updated upstream
 	<version>0.2314.2</version>
+=======
+	<version>1.0.0</version>
+>>>>>>> Stashed changes
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

@@ -2,7 +2,7 @@ name: VERSION workflow
 
 on:
   push:
-    branches: ["main"]
+    branches: ["*"]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -28,15 +28,19 @@ jobs:
           distribution: "adopt"
           cache: maven
           server-id: github
-      - run: echo "BUILD_NUMBER=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f3)" >> $GITHUB_ENV
-      - run: echo "HEAD=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f1)" >> $GITHUB_ENV
-      - run: echo "YEAR=$(cut -c3-4 <<< $(date +%Y))" >> $GITHUB_ENV
-      - run: echo "WEEK=$(date +%V)" >> $GITHUB_ENV
-      - run: echo "APP_VERSION=${{env.HEAD}}.${{env.YEAR}}${{env.WEEK}}.$((${{env.BUILD_NUMBER}} + 1))" >> $GITHUB_ENV
-      - run: echo ${{env.APP_VERSION}}
-      - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit
-      - run: yarn version --new-version ${{ env.APP_VERSION }} --no-git-tag-version
+      - if: ${{ contrains(github.ref, /feature/)  }}
+        run: echo "feature"
+      - if: ${{ contrains(github.ref, /bug/)  }}
+        run: echo "bug"
+      - run: echo "yolo"
+      # - run: echo "MAJOR=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f1)" >> $GITHUB_ENV
+      # - run: echo "YEAR_WEEK=$(cut -c3-4 <<< $(date +%Y))$(date +%V)" >> $GITHUB_ENV
+      # - run: echo "BUILD_NUMBER=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f3)" >> $GITHUB_ENV
+      # - run: echo "APP_VERSION=${{env.HEAD}}.${{env.YEAR_WEEK}}.$((${{env.BUILD_NUMBER}} + 1))" >> $GITHUB_ENV
+      # - run: echo ${{env.APP_VERSION}}
+      # - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit
+      # - run: yarn version --new-version ${{ env.APP_VERSION }} --no-git-tag-version
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "[ci skip] version bump: ${{ env.APP_VERSION }}"
+      # - uses: stefanzweifel/git-auto-commit-action@v4
+      #   with:
+      #     commit_message: "[ci skip] version bump: ${{ env.APP_VERSION }}"
