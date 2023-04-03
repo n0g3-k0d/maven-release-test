@@ -1,8 +1,6 @@
 name: VERSION workflow
 
-on:
-  push:
-    branches: ["*"]
+on: push
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
