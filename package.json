@@ -1,10 +1,6 @@
 {
   "name": "demo",
-<<<<<<< Updated upstream
-  "version": "0.2314.2",
-=======
-  "version": "1.0.0",
->>>>>>> Stashed changes
+  "version": "3.0.0",
   "main": "index.js",
   "repository": "git@github.com:n0g3-k0d/maven-release-test.git",
   "author": "Farkas Egon <farkas.egon@kodinformatika.hu>",

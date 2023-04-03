@@ -26,18 +26,12 @@ jobs:
           distribution: "adopt"
           cache: maven
           server-id: github
-      - if: ${{ contains(github.ref, '/feature/')  }}
-        run: echo "feature"
-      - if: ${{ contains(github.ref, '/bug/')  }}
-        run: echo "bug"
-      - run: echo "yoloa"
-      # - run: echo "MAJOR=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f1)" >> $GITHUB_ENV
-      # - run: echo "YEAR_WEEK=$(cut -c3-4 <<< $(date +%Y))$(date +%V)" >> $GITHUB_ENV
-      # - run: echo "BUILD_NUMBER=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f3)" >> $GITHUB_ENV
-      # - run: echo "APP_VERSION=${{env.HEAD}}.${{env.YEAR_WEEK}}.$((${{env.BUILD_NUMBER}} + 1))" >> $GITHUB_ENV
-      # - run: echo ${{env.APP_VERSION}}
-      # - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit
-      # - run: yarn version --new-version ${{ env.APP_VERSION }} --no-git-tag-version
+      - if: ${{ contains(github.ref, '/feature/') || contains(github.ref, '/feat/')  }}
+        run: yarn version --minor --no-git-tag-version
+      - if: ${{ contains(github.ref, '/bug/') || contains(github.ref, '/bugfix/') || contains(github.ref, '/hotfix/') || contains(github.ref, '/chore/')  }}
+        run: yarn version --patch --no-git-tag-version
+      - run: echo "APP_VERSION=$(sed -e 's/^"//' -e 's/"$//' <<<$(npm pkg get version))" >> $GITHUB_ENV/
+      - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit
 
       # - uses: stefanzweifel/git-auto-commit-action@v4
       #   with:
