@@ -26,9 +26,9 @@ jobs:
           distribution: "adopt"
           cache: maven
           server-id: github
-      - if: ${{ contrains(github.ref, /feature/)  }}
+      - if: ${{ contrains(github.ref, '/feature/')  }}
         run: echo "feature"
-      - if: ${{ contrains(github.ref, /bug/)  }}
+      - if: ${{ contrains(github.ref, '/bug/')  }}
         run: echo "bug"
       - run: echo "yoloa"
       # - run: echo "MAJOR=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//' | cut -d '.' -f1)" >> $GITHUB_ENV
