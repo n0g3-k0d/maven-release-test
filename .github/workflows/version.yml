@@ -30,7 +30,7 @@ jobs:
         run: yarn version --minor --no-git-tag-version
       - if: ${{ contains(github.ref, '/bug/') || contains(github.ref, '/bugfix/') || contains(github.ref, '/hotfix/') || contains(github.ref, '/chore/')  }}
         run: yarn version --patch --no-git-tag-version
-      - run: echo "APP_VERSION=$(sed -e 's/^"//' -e 's/"$//' <<<$(npm pkg get version))" >> $GITHUB_ENV/
+      - run: echo "APP_VERSION=$(sed -e 's/^"//' -e 's/"$//' <<<$(npm pkg get version))" >> $GITHUB_ENV
       - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit
 
       # - uses: stefanzweifel/git-auto-commit-action@v4
