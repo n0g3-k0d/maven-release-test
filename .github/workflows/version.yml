@@ -39,5 +39,4 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "[ci skip] release version: ${{ env.APP_VERSION }}"
-          tagging_message: ${{ env.APP_VERSION }}
+          commit_message: "[ci skip] version bump: ${{ env.APP_VERSION }}"
