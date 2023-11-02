@@ -1,12 +1,19 @@
 name: Release workflow
 
 on:
-  push:
-    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      releaseBranch:
+        description: "Version to bump"
+        required: true
+        default: "minor"
+        type: choice
+        options:
+          - minor
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   maven-build:
@@ -28,11 +35,11 @@ jobs:
           distribution: "adopt"
           cache: maven
           server-id: github
-#      - run: npm version patch -no-git-tag-version
-#      - run: echo "APP_VERSION=$(sed -e 's/^"//' -e 's/"$//' <<<$(npm pkg get version))" >> $GITHUB_ENV
-#      - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit
-#
-#      - uses: stefanzweifel/git-auto-commit-action@v4
-#        with:
-#          commit_message: "[ci skip] release version: ${{ env.APP_VERSION }}"
-#          tagging_message: ${{ env.APP_VERSION }}
+      - run: npm version minor -no-git-tag-version
+      - run: echo "APP_VERSION=$(sed -e 's/^"//' -e 's/"$//' <<<$(npm pkg get version))" >> $GITHUB_ENV
+      - run: mvn -B versions:set -DnewVersion=${{ env.APP_VERSION }} versions:commit
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "[ci skip] release version: ${{ env.APP_VERSION }}"
+          tagging_message: ${{ env.APP_VERSION }}
